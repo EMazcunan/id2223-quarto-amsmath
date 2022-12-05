@@ -1,0 +1,751 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Contenidos}
+\else
+  \newcommand\contentsname{Contenidos}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Listado de Figuras}
+\else
+  \newcommand\listfigurename{Listado de Figuras}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Listado de Tablas}
+\else
+  \newcommand\listtablename{Listado de Tablas}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figura}
+\else
+  \newcommand\figurename{Figura}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Tabla}
+\else
+  \newcommand\tablename{Tabla}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listado}
+\newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{spanish}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Ecuaciones en Quarto con el paquete amsmath},
+  pdfauthor={Eva María Mazcuñán Navarro},
+  pdflang={es},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Ecuaciones en Quarto con el paquete \texttt{amsmath}}
+\author{Eva María Mazcuñán Navarro}
+\date{}
+
+\begin{document}
+\maketitle
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, interior hidden, borderline west={3pt}{0pt}{shadecolor}, breakable, boxrule=0pt, sharp corners, frame hidden]}{\end{tcolorbox}}\fi
+
+\renewcommand*\contentsname{Contenidos}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\hypertarget{introducciuxf3n}{%
+\section{Introducción}\label{introducciuxf3n}}
+
+El paquete \texttt{amsmath} añade nuevas funcionalidades a las
+herramientas estandar de LaTeX para trabajar con ecuaciones. Permite en
+particular:
+
+\begin{itemize}
+\tightlist
+\item
+  Dividir ecuaciones largas en varias líneas. Por ejemplo: \[
+    \begin{split}
+    P(x) & = 1  + x + x^2 \\
+        & \hspace{2em} + x^3 + x^4 + x^5 \\
+        & \hspace{4em} + x^6 + x^7 + x^8
+    \end{split}
+    \]
+\item
+  Agrupar varias ecuaciones en una determinada disposición. Por ejemplo
+  para escribir un sistema de ecuaciones lineales como el siguiente: \[
+    \left\{
+    \begin{alignedat}{2} 
+    2x & + {}   &  3y  & =  10 \\ 
+    x & - {}   &   y  & =  0 
+    \end{alignedat}
+    \right.
+    \]
+\end{itemize}
+
+En este artículo se relacionan las funcionalidades del paquete
+\texttt{amsmath} que pueden usarse en un documento de Quarto
+(\texttt{.qmd}) y funcionan tanto para el formato PDF como para el
+formato HTML, permitiendo en ambos casos numerar las ecuaciones o grupos
+de ecuaciones y crear referencias cruzadas.
+
+\hypertarget{generalidades}{%
+\section{Generalidades}\label{generalidades}}
+
+Como aspectos comunes a las funcionalidades que aprenderemos en las
+siguientes secciones, y en analogía con la sintaxis de los entornos
+\texttt{array} y \texttt{tabular}, tenemos:
+
+\begin{itemize}
+\tightlist
+\item
+  Para crear una nueva línea se utiliza
+  \texttt{\textbackslash{}\textbackslash{}}
+\item
+  Para crear puntos de alineación vertical entre varias líneas, se
+  utiliza \texttt{\&}.
+\end{itemize}
+
+Generalmente los puntos de alineación vertical se establecen para queden
+alineados operadores binarios como los signos \texttt{=}, \texttt{+} o
+\texttt{-}. Una práctica frecuente es disponer varias ecuaciones en
+varias filas de forma que los signos de igualdad \texttt{=} de las
+distintas ecuaciones queden alineados verticalmente. Para obtener un
+espaciado adecuado alrededor de dichos operadores, el símbolo
+\texttt{\&} debe colocarse delante (y no detrás) de ellos.
+
+\hypertarget{partir-una-ecuaciuxf3n-larga-en-varias-luxedneas-el-entorno-split}{%
+\section{\texorpdfstring{Partir una ecuación larga en varias líneas: El
+entorno
+\texttt{split}}{Partir una ecuación larga en varias líneas: El entorno split}}\label{partir-una-ecuaciuxf3n-larga-en-varias-luxedneas-el-entorno-split}}
+
+Veamos varias formas de partir la ecuación \[
+P(x) = 1  + x + x^2 + x^3 + x^4 + x^5 + x^6 + x^7 + x^8
+\] en tres líneas con el entorno \texttt{split}.
+
+En primer lugar vamos a alinear el primer signo \texttt{+} de cada fila.
+El código
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialStringTok{$$}
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{split}\NormalTok{\}}
+\SpecialStringTok{P(x) = 1 \& + x + x\^{}2 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{         \& + x\^{}3 + x\^{}4 + x\^{}5 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{         \& + x\^{}6 + x\^{}7 + x\^{}8}
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{split}\NormalTok{\}}
+\SpecialStringTok{$$}
+\end{Highlighting}
+\end{Shaded}
+
+produce el resultado \[
+\begin{split}
+P(x) = 1 & + x + x^2 \\
+         & + x^3 + x^4 + x^5 \\
+         & + x^6 + x^7 + x^8
+\end{split}
+\]
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, opacityback=0, bottomrule=.15mm, leftrule=.75mm, breakable, rightrule=.15mm, left=2mm, colback=white, toprule=.15mm, colframe=quarto-callout-note-color-frame]
+\begin{minipage}[t]{5.5mm}
+\textcolor{quarto-callout-note-color}{\faInfo}
+\end{minipage}%
+\begin{minipage}[t]{\textwidth - 5.5mm}
+
+En el código de este primer ejemplo, y en todos los ejemplos
+posteriores, se alinean los símbolos \texttt{\&} para que resulte más
+legible, pero no es imprescindible hacerlo.
+
+\end{minipage}%
+\end{tcolorbox}
+
+Ahora tomamos como referencia el signo \texttt{=} de la primera
+ecuación, y añadimos un determinado espacio adicional al inicio de las
+filas segunda y tercera (\texttt{1em} es más o menos la anchura de una
+letra \texttt{m}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialStringTok{$$}
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{split}\NormalTok{\}}
+\SpecialStringTok{P(x) \& = 1  + x + x\^{}2 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{     \& }\SpecialCharTok{\textbackslash{}hspace}\SpecialStringTok{\{1em\} + x\^{}3 + x\^{}4 + x\^{}5 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{     \& }\SpecialCharTok{\textbackslash{}hspace}\SpecialStringTok{\{2em\} + x\^{}6 + x\^{}7 + x\^{}8}
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{split}\NormalTok{\}}
+\SpecialStringTok{$$}
+\end{Highlighting}
+\end{Shaded}
+
+El resultado es \[
+\begin{split}
+P(x) & = 1  + x + x^2 \\
+     & \hspace{1em} + x^3 + x^4 + x^5 \\
+     & \hspace{2em} + x^6 + x^7 + x^8
+\end{split}
+\]
+
+Al principio se advirtió que es mejor situar el símbolo separador
+\texttt{\&} antes de un operador binario, que después. Veamos que en
+efecto, si colocamos el símbolo \texttt{\&} después del signo
+\texttt{=}, se estropea el espacio alrededor del \texttt{=}. Escribiendo
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialStringTok{$$}
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{split}\NormalTok{\}}
+\SpecialStringTok{P(x) = \& 1  + x + x\^{}2 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{       \& + x\^{}3 + x\^{}4 + x\^{}5 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{       \& + x\^{}6 + x\^{}7 + x\^{}8}
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{split}\NormalTok{\}}
+\SpecialStringTok{$$}
+\end{Highlighting}
+\end{Shaded}
+
+resulta \[
+\begin{split}
+P(x) = & 1  + x + x^2 \\
+     & + x^3 + x^4 + x^5 \\
+     & + x^6 + x^7 + x^8
+\end{split}
+\]
+
+El problema con el espaciado aparece porque no hay ningún carácter
+después del signo \texttt{=}. Una forma de \emph{engañar} a LaTeX es
+escribir \texttt{\{\}} después del signo \texttt{=}, que en realidad no
+imprime nada, pero restablece el espaciado natural alrededor del
+\texttt{=}. Escribiendo
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialStringTok{$$}
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{split}\NormalTok{\}}
+\SpecialStringTok{P(x) = \{\} \& 1  + x + x\^{}2 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{          \& + x\^{}3 + x\^{}4 + x\^{}5 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{          \& + x\^{}6 + x\^{}7 + x\^{}8}
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{split}\NormalTok{\}}
+\SpecialStringTok{$$}
+\end{Highlighting}
+\end{Shaded}
+
+obtenemos \[
+\begin{split}
+P(x) = {} & 1  + x + x^2 \\
+     & + x^3 + x^4 + x^5 \\
+     & + x^6 + x^7 + x^8
+\end{split}
+\]
+
+Un bloque creado con \texttt{split} puede numerarse como si tuviera una
+sola línea. Y ser referenciado posteriormente. El código
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialStringTok{$$}
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{split}\NormalTok{\}}
+\SpecialStringTok{P(x) \& = 1  + x + x\^{}2 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{     \& + x\^{}3 + x\^{}4 + x\^{}5 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{     \& + x\^{}6 + x\^{}7 + x\^{}8}
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{split}\NormalTok{\}}
+\SpecialStringTok{$$}\NormalTok{\{\#eq{-}split\}}
+
+\NormalTok{... la @eq{-}split ...}
+\end{Highlighting}
+\end{Shaded}
+
+genera la siguiente salida:
+\begin{equation}\protect\hypertarget{eq-split}{}{
+\begin{split}
+P(x) & = 1  + x + x^2 \\
+ & + x^3 + x^4 + x^5 \\
+ & + x^6 + x^7 + x^8
+\end{split}
+}\label{eq-split}\end{equation}
+
+\ldots{} la Ecuación~\ref{eq-split} \ldots{}
+
+\hypertarget{varias-ecuaciones-centradas-entorno-gather}{%
+\section{\texorpdfstring{Varias ecuaciones centradas: Entorno
+\texttt{gather}}{Varias ecuaciones centradas: Entorno gather}}\label{varias-ecuaciones-centradas-entorno-gather}}
+
+El entorno \texttt{gather} agrupa varias ecuaciones, quedando cada una
+centrada en su fila. Por ejemplo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{gathered}\NormalTok{\} }
+\NormalTok{2x + 3y =  10 }\FunctionTok{\textbackslash{}\textbackslash{}} 
+\NormalTok{x {-} y =  0}
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{gathered}\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+da como resultado \[
+\begin{gathered} 
+2x + 3y =  10 \\ 
+x - y =  0
+\end{gathered}
+\]
+
+El bloque creado puede numerarse como una única ecuación. Escribiendo
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialStringTok{$$}
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{gathered}\NormalTok{\}}\SpecialStringTok{ }
+\SpecialStringTok{2x + 3y =  10 }\SpecialCharTok{\textbackslash{}\textbackslash{}}\SpecialStringTok{ }
+\SpecialStringTok{x {-} y =  0}
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{gathered}\NormalTok{\}}
+\SpecialStringTok{$$}\NormalTok{\{\#eq{-}gat\}}
+
+\NormalTok{La @eq{-}gat ... El sistema [{-}@eq{-}gat] ...}
+\end{Highlighting}
+\end{Shaded}
+
+obtenemos \begin{equation}\protect\hypertarget{eq-gat}{}{
+\begin{gathered} 
+2x + 3y =  10 \\ 
+x - y =  0
+\end{gathered}
+}\label{eq-gat}\end{equation}
+
+La Ecuación~\ref{eq-gat} \ldots{} El sistema \ref{eq-gat} \ldots{}
+
+Notar que la sintaxis \texttt{{[}-@eq-gat{]}} para la segunda referencia
+cruzada omite el prefijo automático ``Ecuación'' e imprime sólo el
+número.
+
+\hypertarget{varias-ecuaciones-con-alineaciuxf3n-vertical-los-entornos-aligned-y-alignedat.}{%
+\section{\texorpdfstring{Varias ecuaciones con alineación vertical: Los
+entornos \texttt{aligned} y
+\texttt{alignedat}.}{Varias ecuaciones con alineación vertical: Los entornos aligned y alignedat.}}\label{varias-ecuaciones-con-alineaciuxf3n-vertical-los-entornos-aligned-y-alignedat.}}
+
+Mientras que el entorno \texttt{gather} que acabamos de estudiar en la
+sección previa, centra cada ecuación en su fila, los entornos
+\texttt{aligned} y \texttt{alignedat} hacen uso del separador
+\texttt{\&} para controlar la alineación vertical de las diferentes
+ecuaciones. En esta sección veremos como utilizar los entornos
+\texttt{aligned} y \texttt{alignedat} para mejorar el aspecto del
+sistema \ref{eq-gat}, alineando primero el signo \texttt{=} de las dos
+ecuaciones, y perfeccionando después la alineación de los signos
+\texttt{+} y \texttt{-} y las incógnitas. El objetivo es conseguir que
+quede así:
+
+\[
+\begin{alignedat}{2} 
+2x & + {}   &  3y  & =  10 \\ 
+ x & - {}   &   y  & =  0 
+\end{alignedat}
+\]
+
+\hypertarget{el-entorno-aligned}{%
+\subsection{\texorpdfstring{El entorno
+\texttt{aligned}}{El entorno aligned}}\label{el-entorno-aligned}}
+
+En el entorno \texttt{aligned}, el símbolo \texttt{\&} crea un punto de
+alineación vertical, creando una columna alineada a la derecha a su
+izquierda y una columna alineada a la izquierda a su derecha, esto es,
+una disposición similar a la creada con un grupo \texttt{rl} en el
+entorno \texttt{array}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{aligned}\NormalTok{\} }
+\NormalTok{2x + 3y \& =  10 }\FunctionTok{\textbackslash{}\textbackslash{}}
+\NormalTok{  x {-} y \& =  0 }
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{aligned}\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+da como resultado \[
+\begin{aligned} 
+2x + 3y & =  10 \\
+  x - y & =  0 
+\end{aligned}
+\]
+
+El mismo ejemplo con una llave a la izquierda, con la notación habitual
+para sistemas de ecuaciones:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialStringTok{$$}
+\SpecialCharTok{\textbackslash{}left\textbackslash{}\{}
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{aligned}\NormalTok{\}}\SpecialStringTok{ }
+\SpecialStringTok{2x + 3y \& =  10 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{  x {-} y \& =  0 }
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{aligned}\NormalTok{\}}
+\SpecialCharTok{\textbackslash{}right}\SpecialStringTok{.}
+\SpecialStringTok{$$}
+\end{Highlighting}
+\end{Shaded}
+
+\[
+\left\{
+\begin{aligned} 
+2x + 3y & =  10 \\
+  x - y & =  0 
+\end{aligned}
+\right.
+\]
+
+Como ya hemos comentando varias veces, para conseguir un espaciado
+cuidado alrededor de operadores binarios como \texttt{=}, \texttt{+} o
+\texttt{-}, el símbolo separador \texttt{\&} debe ir delante de dichos
+operadores. Comparar el primer ejemplo del apartado con el siguiente,
+donde el separador \texttt{\&} se coloca detrás, en vez de delante, del
+operador \texttt{=}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialStringTok{$$}
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{aligned}\NormalTok{\}}\SpecialStringTok{ }
+\SpecialStringTok{2x + 3y  = \& 10 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{  x {-} y  = \& 0 }
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{aligned}\NormalTok{\}}
+\SpecialStringTok{$$}
+\end{Highlighting}
+\end{Shaded}
+
+\[
+\begin{aligned} 
+2x + 3y  = & 10 \\
+  x - y  = & 0 
+\end{aligned}
+\] Hemos perdido el espaciado natural a la derecha del signo \texttt{=}.
+Esto ya nos ocurrió antes en un ejemplo del entorno \texttt{split},
+sabemos que pasa por no haber ningún carácter después del signo
+\texttt{=}. Lo corregimos escribiendo \texttt{\{\}} para engañar a
+LaTeX, como hicimos con el ejemplo del entorno \texttt{split}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialStringTok{$$}
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{aligned}\NormalTok{\}}\SpecialStringTok{ }
+\SpecialStringTok{2x + 3y  = \{\} \& 10 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{  x {-} y  = \{\} \& 0 }
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{aligned}\NormalTok{\}}
+\SpecialStringTok{$$}
+\end{Highlighting}
+\end{Shaded}
+
+\[
+\begin{aligned} 
+2x + 3y  = {} & 10 \\
+  x - y  = {} & 0 
+\end{aligned}
+\]
+
+Si se quieren crean varios grupos de columnas \texttt{rl}, se usa un
+símbolo \texttt{\&} adicional para separar los diferentes grupos. El
+código
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialStringTok{$$}
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{aligned}\NormalTok{\}}\SpecialStringTok{ }
+\SpecialStringTok{2x + 3y \& = 10   \&    x {-} y \& = 0 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{  x {-} y \& = 0    \&   2x + y \& = 3}
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{aligned}\NormalTok{\}}
+\SpecialStringTok{$$}
+\end{Highlighting}
+\end{Shaded}
+
+da como resultado \[
+\begin{aligned} 
+2x + 3y & = 10   &    x - y & = 0 \\
+  x - y & = 0    &   2x + y & = 3
+\end{aligned}
+\]
+
+\hypertarget{el-entorno-alignedat}{%
+\subsection{\texorpdfstring{El entorno
+\texttt{alignedat}}{El entorno alignedat}}\label{el-entorno-alignedat}}
+
+Acabamos de ver que, cuando se crean varios grupos de columnas
+\texttt{rl} con el entorno \texttt{aligned}, se crea de forma automática
+un espaciado horizontal predeterminado entre los grupos. Con el entorno
+\texttt{alignedat} podemos controlar ese espaciado entre los grupos.
+
+Repetimos el ejemplo anterior sin espaciado entre los dos grupos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialStringTok{$$}
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{alignedat}\NormalTok{\}}\SpecialStringTok{\{2\} }
+\SpecialStringTok{2x + 3y  \& = 10   \&    x {-} y \& = 0 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{  x {-} y  \& = 0    \&   2x + y \& = 3}
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{alignedat}\NormalTok{\}}
+\SpecialStringTok{$$}
+\end{Highlighting}
+\end{Shaded}
+
+\[
+\begin{alignedat}{2} 
+2x + 3y  & = 10   &    x - y & = 0 \\
+  x - y  & = 0    &   2x + y & = 3
+\end{alignedat}
+\]
+
+Y ahora con un espaciado igual a \texttt{2em}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialStringTok{$$}
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{alignedat}\NormalTok{\}}\SpecialStringTok{\{2\} }
+\SpecialStringTok{2x + 3y  = \& 10   \&  }\SpecialCharTok{\textbackslash{}hspace}\SpecialStringTok{\{2em\}   x {-} y \& = 0 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\SpecialStringTok{  x {-} y  = \& 0    \&   2x + y \& = 3}
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{alignedat}\NormalTok{\}}
+\SpecialStringTok{$$}
+\end{Highlighting}
+\end{Shaded}
+
+\[
+\begin{alignedat}{2} 
+2x + 3y  = & 10   &  \hspace{2em}   x - y & = 0 \\
+  x - y  = & 0    &   2x + y & = 3
+\end{alignedat}
+\]
+
+Notar que el entorno \texttt{alignedat} necesita un argumento, que se
+indica entre llaves, y que en nuestros ejemplos tiene el valor
+\texttt{2} (\texttt{\textbackslash{}begin\{alignedat\}\{2\}}). Este
+argumento indica el número de grupos de columnas \texttt{rl} (o,
+equivalentemente, el número de símbolos \texttt{\&} más \(1\), dividido
+entre \(2\)).
+
+\hypertarget{sistemas-de-ecuaciones-lineales-con-el-entorno-alignedat}{%
+\subsection{\texorpdfstring{Sistemas de ecuaciones lineales con el
+entorno
+\texttt{alignedat}}{Sistemas de ecuaciones lineales con el entorno alignedat}}\label{sistemas-de-ecuaciones-lineales-con-el-entorno-alignedat}}
+
+El control del espaciado entre grupos de columnas \texttt{rl} con
+\texttt{alignedat} puede (ab)usarse para mejorar la alineación de los
+signos e incógnitas en un sistema de ecuaciones lineales. Volvemos a
+escribir el sistema al inicio de la sección usando el entorno
+\texttt{alignedat} con dos grupos de columnas \texttt{rl}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialStringTok{$$}
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{alignedat}\NormalTok{\}}\SpecialStringTok{\{2\} }
+\SpecialStringTok{2x \& +    \& 3y \& =  10 }\SpecialCharTok{\textbackslash{}\textbackslash{}}\SpecialStringTok{ }
+\SpecialStringTok{ x \& {-}    \&  y \& =  0 }
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{alignedat}\NormalTok{\}}
+\SpecialStringTok{$$}
+\end{Highlighting}
+\end{Shaded}
+
+El resultado es \[
+\begin{alignedat}{2} 
+2x & +    & 3y & =  10 \\ 
+ x & -    &  y & =  0 
+\end{alignedat}
+\]
+
+Hemos conseguido que los signos \texttt{+} y \texttt{-} y las incógnitas
+\texttt{x} e \texttt{y} queden alineados verticalmente. Pero se aprecia
+que no hay espacio alrededor de los signos \texttt{+} y \texttt{-} (como
+sí lo hay alrededor del signo \texttt{=}). Esto ya nos ocurrió antes, en
+un ejemplo del entorno \texttt{split} y otro del entorno
+\texttt{aligned}. Sabemos que pasa por no haber ningún carácter después
+de los signos \texttt{+} y \texttt{-}, y que podemos corregirlo
+escribiendo \texttt{\{\}} después de dichos signos. Aprovechamos para
+añadir una llave delimitando el sistema, ahora a la derecha.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialStringTok{$$}
+\SpecialCharTok{\textbackslash{}left}\SpecialStringTok{.}
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{alignedat}\NormalTok{\}}\SpecialStringTok{\{2\} }
+\SpecialStringTok{2x \& + \{\}   \&  3y  \& =  10 }\SpecialCharTok{\textbackslash{}\textbackslash{}}\SpecialStringTok{ }
+\SpecialStringTok{ x \& {-} \{\}   \&   y  \& =  0 }
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{alignedat}\NormalTok{\}}
+\SpecialCharTok{\textbackslash{}right\textbackslash{}\}}
+\SpecialStringTok{$$}
+\end{Highlighting}
+\end{Shaded}
+
+\[
+\left.
+\begin{alignedat}{2} 
+2x & + {}   &  3y  & =  10 \\ 
+ x & - {}   &   y  & =  0 
+\end{alignedat}
+\right\}
+\]
+
+
+
+\end{document}

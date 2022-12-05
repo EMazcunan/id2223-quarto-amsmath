@@ -1,0 +1,396 @@
+---
+title: Ecuaciones en Quarto con el paquete `amsmath`
+author: Eva  María Mazcuñán Navarro
+lang: es
+language: 
+    toc-title-document: "Contenidos"
+number-sections: true
+toc: true
+lof: false
+lot: false
+format:
+    html: 
+        theme:
+          light: flatly
+          dark: darkly  
+    pdf: 
+      keep-tex: true
+---
+
+
+:::: {.content-visible when-format="html"}
+::: {.callout-note appearance="simple"}
+Si prefieres leer este documento en formato PDF pincha en este icono: <a href="amsmath.pdf" target="_blank" title="Open PDF"> {{< fa file-pdf >}}</a>
+:::
+::::
+
+
+# Introducción
+
+El paquete `amsmath` añade nuevas funcionalidades a las herramientas estandar de LaTeX para trabajar con ecuaciones. Permite en particular:
+
+- Dividir ecuaciones largas en varias líneas. Por ejemplo:
+    $$
+    \begin{split}
+    P(x) & = 1  + x + x^2 \\
+        & \hspace{2em} + x^3 + x^4 + x^5 \\
+        & \hspace{4em} + x^6 + x^7 + x^8
+    \end{split}
+    $$
+- Agrupar varias ecuaciones en una determinada disposición. Por ejemplo para escribir un sistema de ecuaciones lineales como el siguiente:
+    $$
+    \left\{
+    \begin{alignedat}{2} 
+    2x & + {}   &  3y  & =  10 \\ 
+    x & - {}   &   y  & =  0 
+    \end{alignedat}
+    \right.
+    $$
+
+En este artículo se relacionan las funcionalidades del paquete `amsmath` que pueden usarse en un documento de Quarto (`.qmd`) y funcionan tanto para el formato PDF como para el formato HTML, permitiendo en ambos casos numerar las ecuaciones o grupos de ecuaciones y crear referencias cruzadas. 
+
+# Generalidades
+
+Como aspectos comunes a las funcionalidades que aprenderemos en las siguientes secciones, y en analogía con la sintaxis de los entornos `array` y `tabular`, tenemos:
+
+- Para crear una nueva línea se utiliza `\\`
+- Para crear puntos de alineación vertical entre varias líneas, se utiliza `&`.
+
+Generalmente los puntos de alineación vertical se establecen para queden alineados operadores binarios como los signos `=`, `+` o `-`. Una práctica frecuente es disponer varias ecuaciones en varias filas de forma que los signos de igualdad `=` de las distintas ecuaciones queden alineados verticalmente. Para obtener un espaciado adecuado alrededor de dichos operadores, el símbolo `&` debe colocarse delante (y no detrás) de ellos.
+
+
+# Partir una ecuación larga en varias líneas: El entorno `split`
+
+Veamos varias formas de partir la ecuación 
+$$
+P(x) = 1  + x + x^2 + x^3 + x^4 + x^5 + x^6 + x^7 + x^8
+$$
+en tres líneas con el entorno `split`.
+
+En primer lugar vamos a alinear el primer signo `+` de cada fila. El código
+
+
+```latex
+$$
+\begin{split}
+P(x) = 1 & + x + x^2 \\
+         & + x^3 + x^4 + x^5 \\
+         & + x^6 + x^7 + x^8
+\end{split}
+$$
+```
+produce el resultado
+$$
+\begin{split}
+P(x) = 1 & + x + x^2 \\
+         & + x^3 + x^4 + x^5 \\
+         & + x^6 + x^7 + x^8
+\end{split}
+$$
+
+::: {.callout-note appearance="simple"}
+En el código de este primer ejemplo, y en todos los ejemplos posteriores, se alinean los símbolos `&` para que resulte más legible, pero no es imprescindible hacerlo.
+:::
+
+Ahora tomamos como referencia el signo `=` de la primera ecuación, y añadimos un determinado espacio adicional al inicio de las filas segunda y tercera (`1em` es más o menos la anchura de una letra `m`):
+
+```latex
+$$
+\begin{split}
+P(x) & = 1  + x + x^2 \\
+     & \hspace{1em} + x^3 + x^4 + x^5 \\
+     & \hspace{2em} + x^6 + x^7 + x^8
+\end{split}
+$$
+```
+El resultado es
+$$
+\begin{split}
+P(x) & = 1  + x + x^2 \\
+     & \hspace{1em} + x^3 + x^4 + x^5 \\
+     & \hspace{2em} + x^6 + x^7 + x^8
+\end{split}
+$$
+
+Al principio se advirtió que es mejor situar el símbolo separador `&` antes de un operador binario, que después. Veamos que en efecto, si colocamos el símbolo `&` después del signo `=`, se estropea el espacio alrededor del `=`. Escribiendo
+```latex
+$$
+\begin{split}
+P(x) = & 1  + x + x^2 \\
+       & + x^3 + x^4 + x^5 \\
+       & + x^6 + x^7 + x^8
+\end{split}
+$$
+```
+resulta
+$$
+\begin{split}
+P(x) = & 1  + x + x^2 \\
+     & + x^3 + x^4 + x^5 \\
+     & + x^6 + x^7 + x^8
+\end{split}
+$$
+
+El problema con el espaciado aparece porque no hay ningún carácter después del signo `=`. Una forma de _engañar_ a LaTeX es escribir `{}` después del signo `=`, que en realidad no imprime nada, pero restablece el espaciado natural alrededor del `=`. Escribiendo
+```latex
+$$
+\begin{split}
+P(x) = {} & 1  + x + x^2 \\
+          & + x^3 + x^4 + x^5 \\
+          & + x^6 + x^7 + x^8
+\end{split}
+$$
+```
+obtenemos
+$$
+\begin{split}
+P(x) = {} & 1  + x + x^2 \\
+     & + x^3 + x^4 + x^5 \\
+     & + x^6 + x^7 + x^8
+\end{split}
+$$
+
+
+Un bloque creado con `split` puede numerarse como si tuviera una sola línea. Y ser referenciado posteriormente. El código 
+```latex
+$$
+\begin{split}
+P(x) & = 1  + x + x^2 \\
+     & + x^3 + x^4 + x^5 \\
+     & + x^6 + x^7 + x^8
+\end{split}
+$${#eq-split}
+
+... la @eq-split ...
+
+```
+genera la siguiente salida:
+$$
+\begin{split}
+P(x) & = 1  + x + x^2 \\
+ & + x^3 + x^4 + x^5 \\
+ & + x^6 + x^7 + x^8
+\end{split}
+$${#eq-split}
+
+... la @eq-split ...
+
+# Varias ecuaciones centradas: Entorno `gather`
+
+El entorno `gather` agrupa varias ecuaciones, quedando cada una centrada en su fila. Por ejemplo:
+
+```latex
+\begin{gathered} 
+2x + 3y =  10 \\ 
+x - y =  0
+\end{gathered}
+```
+da como resultado
+$$
+\begin{gathered} 
+2x + 3y =  10 \\ 
+x - y =  0
+\end{gathered}
+$$
+
+
+El bloque creado puede numerarse como una única ecuación. Escribiendo
+```latex
+$$
+\begin{gathered} 
+2x + 3y =  10 \\ 
+x - y =  0
+\end{gathered}
+$${#eq-gat}
+
+La @eq-gat ... El sistema [-@eq-gat] ...
+```
+obtenemos
+$$
+\begin{gathered} 
+2x + 3y =  10 \\ 
+x - y =  0
+\end{gathered}
+$${#eq-gat}
+
+La @eq-gat ... El sistema [-@eq-gat] ...
+
+
+Notar que la sintaxis `[-@eq-gat]` para la segunda referencia cruzada omite el prefijo automático "Ecuación" e imprime sólo el número. 
+
+# Varias ecuaciones con alineación vertical: Los entornos `aligned` y `alignedat`.
+
+Mientras que el entorno `gather` que acabamos de estudiar en la sección previa, centra cada ecuación en su fila,  los entornos `aligned` y `alignedat` hacen uso del separador `&` para controlar la alineación vertical de las diferentes ecuaciones. En esta sección veremos como utilizar los entornos `aligned` y `alignedat` para mejorar el aspecto del sistema [-@eq-gat], alineando primero el signo `=` de las dos ecuaciones, y perfeccionando después la alineación de los signos `+` y `-` y las incógnitas. El objetivo es conseguir que quede así:
+
+$$
+\begin{alignedat}{2} 
+2x & + {}   &  3y  & =  10 \\ 
+ x & - {}   &   y  & =  0 
+\end{alignedat}
+$$
+
+## El entorno `aligned`
+
+En el entorno `aligned`, el símbolo `&` crea un punto de alineación vertical, creando  una columna alineada a la derecha a su izquierda y una columna alineada a la izquierda a su derecha, esto es, una disposición similar a la creada con un grupo `rl` en el entorno `array`.
+```latex
+\begin{aligned} 
+2x + 3y & =  10 \\
+  x - y & =  0 
+\end{aligned}
+```
+da como resultado
+$$
+\begin{aligned} 
+2x + 3y & =  10 \\
+  x - y & =  0 
+\end{aligned}
+$$
+
+El mismo ejemplo con una llave a la izquierda, con la notación habitual para sistemas de ecuaciones:
+```latex
+$$
+\left\{
+\begin{aligned} 
+2x + 3y & =  10 \\
+  x - y & =  0 
+\end{aligned}
+\right.
+$$
+```
+$$
+\left\{
+\begin{aligned} 
+2x + 3y & =  10 \\
+  x - y & =  0 
+\end{aligned}
+\right.
+$$
+
+Como ya hemos comentando varias veces, para conseguir un espaciado cuidado alrededor de operadores binarios como `=`, `+` o `-`,   el símbolo separador `&` debe ir delante de dichos operadores.  Comparar el primer ejemplo del apartado con el siguiente, donde el separador `&` se coloca detrás, en vez de delante, del operador `=`:
+```latex
+$$
+\begin{aligned} 
+2x + 3y  = & 10 \\
+  x - y  = & 0 
+\end{aligned}
+$$
+```
+$$
+\begin{aligned} 
+2x + 3y  = & 10 \\
+  x - y  = & 0 
+\end{aligned}
+$$
+Hemos perdido el espaciado natural a la derecha del signo `=`. Esto ya nos ocurrió antes en un ejemplo del entorno `split`, sabemos que pasa por no haber ningún carácter después del signo `=`. Lo corregimos escribiendo `{}` para engañar a LaTeX, como hicimos con el ejemplo del entorno `split`.
+```latex
+$$
+\begin{aligned} 
+2x + 3y  = {} & 10 \\
+  x - y  = {} & 0 
+\end{aligned}
+$$
+```
+$$
+\begin{aligned} 
+2x + 3y  = {} & 10 \\
+  x - y  = {} & 0 
+\end{aligned}
+$$
+
+
+Si se quieren crean varios grupos de columnas `rl`, se usa un símbolo `&` adicional para separar los diferentes grupos. El código 
+
+```latex
+$$
+\begin{aligned} 
+2x + 3y & = 10   &    x - y & = 0 \\
+  x - y & = 0    &   2x + y & = 3
+\end{aligned}
+$$
+```
+da como resultado
+$$
+\begin{aligned} 
+2x + 3y & = 10   &    x - y & = 0 \\
+  x - y & = 0    &   2x + y & = 3
+\end{aligned}
+$$
+
+
+## El entorno `alignedat`
+
+Acabamos de ver que, cuando se crean varios grupos de columnas `rl` con el entorno `aligned`, se crea de forma automática un espaciado horizontal predeterminado entre los grupos. Con el entorno `alignedat` podemos controlar ese espaciado entre los grupos. 
+
+Repetimos el ejemplo anterior sin espaciado entre los dos grupos:
+```latex
+$$
+\begin{alignedat}{2} 
+2x + 3y  & = 10   &    x - y & = 0 \\
+  x - y  & = 0    &   2x + y & = 3
+\end{alignedat}
+$$
+```
+$$
+\begin{alignedat}{2} 
+2x + 3y  & = 10   &    x - y & = 0 \\
+  x - y  & = 0    &   2x + y & = 3
+\end{alignedat}
+$$
+
+Y ahora con un espaciado igual a `2em`:
+```latex
+$$
+\begin{alignedat}{2} 
+2x + 3y  = & 10   &  \hspace{2em}   x - y & = 0 \\
+  x - y  = & 0    &   2x + y & = 3
+\end{alignedat}
+$$
+```
+$$
+\begin{alignedat}{2} 
+2x + 3y  = & 10   &  \hspace{2em}   x - y & = 0 \\
+  x - y  = & 0    &   2x + y & = 3
+\end{alignedat}
+$$
+
+Notar que el entorno `alignedat` necesita un argumento, que se indica entre llaves, y que en nuestros ejemplos tiene el valor `2` (`\begin{alignedat}{2}`). Este argumento indica el número de grupos de columnas `rl` (o, equivalentemente, el número de símbolos `&` más $1$, dividido entre $2$). 
+
+## Sistemas de ecuaciones lineales con el entorno `alignedat`
+
+El control del espaciado entre grupos de columnas `rl` con `alignedat` puede (ab)usarse para mejorar la alineación de los signos e incógnitas en un sistema de ecuaciones lineales. Volvemos a escribir el sistema al inicio de la sección usando el entorno `alignedat` con dos grupos de columnas `rl`:
+
+```latex
+$$
+\begin{alignedat}{2} 
+2x & +    & 3y & =  10 \\ 
+ x & -    &  y & =  0 
+\end{alignedat}
+$$
+```
+El resultado es
+$$
+\begin{alignedat}{2} 
+2x & +    & 3y & =  10 \\ 
+ x & -    &  y & =  0 
+\end{alignedat}
+$$
+
+Hemos conseguido que los signos `+` y `-` y las incógnitas `x` e `y` queden alineados verticalmente. Pero se aprecia que no hay espacio alrededor de los signos `+` y `-` (como sí lo hay alrededor del signo `=`). Esto ya nos ocurrió antes, en un ejemplo del entorno `split` y otro del entorno `aligned`. Sabemos que pasa por no haber ningún carácter después de los signos `+` y `-`, y que podemos corregirlo escribiendo `{}` después de  dichos signos. Aprovechamos para añadir una llave delimitando el sistema, ahora a la derecha.
+```latex
+$$
+\left.
+\begin{alignedat}{2} 
+2x & + {}   &  3y  & =  10 \\ 
+ x & - {}   &   y  & =  0 
+\end{alignedat}
+\right\}
+$$
+```
+$$
+\left.
+\begin{alignedat}{2} 
+2x & + {}   &  3y  & =  10 \\ 
+ x & - {}   &   y  & =  0 
+\end{alignedat}
+\right\}
+$$
